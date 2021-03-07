@@ -36,6 +36,11 @@ client.on('ready', () => {
     client.user.setActivity(`Moderating ${client.guilds.cache.size} servers`);
 });
 
+client.on("guildCreate", guild => {
+    console.log("Joined a new guild: " + guild.name);
+    client.user.setActivity(`Moderating ${client.guilds.cache.size} servers`);
+})
+
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
