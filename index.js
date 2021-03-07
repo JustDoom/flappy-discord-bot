@@ -24,13 +24,6 @@ con.connect(function (err) {
     console.log("Connected!");
 });
 
-/**const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-
-    client.commands.set(command.name, command);
-}**/
-
 function getDirectories() {
 	return fs.readdirSync('./commands').filter(function subFolder(file) {
 		return fs.statSync('./commands/' + file).isDirectory();
@@ -67,21 +60,5 @@ client.on("guildDelete", guild => {
     console.log("Left a guild: " + guild.name);
     client.user.setActivity(`Moderating ${client.guilds.cache.size} servers`);
 })
-
-client.on('message', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.substring(prefix.length).split(" ");
-    const command = args.shift().toLowerCase();
-
-    if (command === 'stats') {
-        //client.commands.get('stats').execute(message, args, Discord, db, client);
-        client.commands.get('setup').execute(message, args, Discord, db, client);
-    }
-
-    if (message.author.id === '474482013886480385' || message.author.id === '371331470230290435') {
-        
-    }
-});
 
 client.login(config.token);
