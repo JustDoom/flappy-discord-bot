@@ -3,7 +3,7 @@ module.exports = {
     execute(message, args, Discord, db, client){
         db.add('bot.commandsRun', 1);
 
-        message.guild.createChannel("setup", "test")
+        //message.guild.createChannel("setup", "test")
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor('#2c5999')
