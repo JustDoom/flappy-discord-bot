@@ -6,7 +6,12 @@ module.exports = {
         var server = message.guild;
         var name = message.author.username;
 
-        server.channel.create("setup", "text")
+        server.channel.create("setup", {
+            type: 'text',
+        })
+        .then((channel) => {
+            console.log(channel)
+        })
 
         const newEmbed = new Discord.MessageEmbed()
             .setColor('#2c5999')
