@@ -8,7 +8,7 @@ const client = new Discord.Client();
 
 client.commands = new Discord.Collection();
 
-//const prefix = '?';
+const prefix = '?';
 
 //mysql
 var con = mysql.createConnection({
