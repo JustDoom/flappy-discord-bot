@@ -33,7 +33,7 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
     console.log('Bot On');
-    client.user.setActivity('yes');
+    client.user.setActivity(`Moderating ${client.guilds.cache.size} servers`);
 });
 
 client.on('message', message => {
