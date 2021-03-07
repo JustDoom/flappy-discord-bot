@@ -11,7 +11,7 @@ client.commands = new Discord.Collection();
 const prefix = '?';
 
 //mysql
-/**var con = mysql.createConnection({
+var con = mysql.createConnection({
     host: config.host,
     user: config.user,
     password: config.password,
@@ -22,7 +22,7 @@ const prefix = '?';
 con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
-});**/
+});
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
@@ -38,6 +38,11 @@ client.on('ready', () => {
 
 client.on("guildCreate", guild => {
     console.log("Joined a new guild: " + guild.name);
+    client.user.setActivity(`Moderating ${client.guilds.cache.size} servers`);
+})
+
+client.on("guildDelete", guild => {
+    console.log("Left a guild: " + guild.name);
     client.user.setActivity(`Moderating ${client.guilds.cache.size} servers`);
 })
 
