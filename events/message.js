@@ -48,7 +48,7 @@ module.exports = async (client, message) => {
 	}
 
 	try {
-		command.execute(client, message, args, con, Discord, errormsg, sleep, isDonator, config, FixNumber, command);
+		command.execute(message, args, Discord, db, client);
 	} catch (error) {
 		console.error(error);
 		message.reply(`There was an error executing that command\nError:${error}`);
