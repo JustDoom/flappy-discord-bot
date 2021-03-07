@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const mysql = require('mysql');
-const db = require('quick.db');
 const fs = require('fs');
 const config = require('./config.json');
 

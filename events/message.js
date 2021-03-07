@@ -1,6 +1,7 @@
 const config = require('../config.json');
 const { MessageAttachment, MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
+const db = require('quick.db');
 
 module.exports = async (client, message) => {
     if (message.author.bot) return false;
