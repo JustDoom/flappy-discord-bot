@@ -8,7 +8,7 @@ const client = new Discord.Client();
 
 client.commands = new Discord.Collection();
 
-const prefix = '?';
+//const prefix = '?';
 
 //mysql
 var con = mysql.createConnection({
@@ -24,12 +24,34 @@ con.connect(function (err) {
     console.log("Connected!");
 });
 
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+/**const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
     client.commands.set(command.name, command);
-}
+}**/
+
+function getDirectories() {
+	return fs.readdirSync('./commands').filter(function subFolder(file) {
+		return fs.statSync('./commands/' + file).isDirectory();
+	});
+};
+let commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const folder of getDirectories()) {
+	const folderFiles = fs.readdirSync('./commands/' + folder).filter(file => file.endsWith('.js'));
+	for (const file of folderFiles) {
+		commandFiles.push([folder, file]);
+	};
+};
+for (const file of commandFiles) {
+	let command;
+	if (Array.isArray(file)) {
+		command = require(`./commands/${file[0]}/${file[1]}`);
+	} else {
+		command = require(`./commands/${file}`);
+	};
+	client.commands.set(command.name, command);
+};
 
 client.on('ready', () => {
     console.log('Bot On');
@@ -54,6 +76,7 @@ client.on('message', message => {
 
     if (command === 'stats') {
         client.commands.get('stats').execute(message, args, Discord, db, client);
+        client.commands.get('setup').execute(message, args, Discord, db, client);
     }
 
     if (message.author.id === '474482013886480385' || message.author.id === '371331470230290435') {
