@@ -75,7 +75,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
     if (command === 'stats') {
-        client.commands.get('stats').execute(message, args, Discord, db, client);
+        //client.commands.get('stats').execute(message, args, Discord, db, client);
         client.commands.get('setup').execute(message, args, Discord, db, client);
     }
 
