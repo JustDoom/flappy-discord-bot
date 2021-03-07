@@ -8,7 +8,7 @@ const client = new Discord.Client();
 
 client.commands = new Discord.Collection();
 
-const prefix = '?';
+//const prefix = '?';
 
 //mysql
 var con = mysql.createConnection({
@@ -24,6 +24,7 @@ con.connect(function (err) {
     console.log("Connected!");
 });
 
+client.commands = new Discord.Collection();
 function getDirectories() {
 	return fs.readdirSync('./commands').filter(function subFolder(file) {
 		return fs.statSync('./commands/' + file).isDirectory();
