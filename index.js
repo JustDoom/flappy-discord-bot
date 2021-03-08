@@ -9,20 +9,6 @@ client.commands = new Discord.Collection();
 
 //const prefix = '?';
 
-//mysql
-var con = mysql.createConnection({
-    host: config.host,
-    user: config.user,
-    password: config.password,
-    port: config.port,
-    database: config.database
-});
-
-con.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected!");
-});
-
 fs.readdir("./events/", (err, files) => {
 	if (err) return console.error(err);
 	files.forEach(file => {

@@ -1,6 +1,6 @@
 module.exports = {
     name: 'settings',
-    execute(message, args, Discord, db, client) {
+    execute(message, args, Discord, db, client, con) {
         db.add('bot.commandsRun', 1);
 
         let prefix;

@@ -3,26 +3,17 @@ const { MessageAttachment, MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
 const db = require('quick.db');
 
+const con = require('../mysql.js');
+
 module.exports = async (client, message) => {
     if (message.author.bot) return false;
 
     if (message.content.includes("@here") || message.content.includes("@everyone")) return false;
 
-    if (message.mentions.has(client.user)) {
-        message.reply('My prefix is ^')
-    }
     if (message.channel.type === 'dm') {
         if (message.attachments.size == 1) {
-            var picture = message.attachments.first()
-            console.log(picture)
-            var attachmenturl = picture.attachment
-            const response = await fetch(attachmenturl, {
-                method: 'GET'
-            });
-            var buffer = await response.buffer();
-            client.channels.cache.get(config.dmattachmentID).send(new MessageAttachment(buffer, `image.png`))
-        }
-        client.channels.cache.get(config.dmchannelID).send(`${message.author.id}, ${message.author.username}: ${message.content}`);
+            return;
+		}
     }
 
 	if (!message.content.startsWith('?')) return;
@@ -49,7 +40,7 @@ module.exports = async (client, message) => {
 	}
 
 	try {
-		command.execute(message, args, Discord, db, client);
+		command.execute(message, args, Discord, db, client, con);
 	} catch (error) {
 		console.error(error);
 		message.reply(`There was an error executing that command\nError:${error}`);
