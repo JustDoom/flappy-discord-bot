@@ -3,7 +3,8 @@ const { MessageAttachment, MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
 const db = require('quick.db');
 
-const con = require('../mysql.js');
+const mysql = require('../mysql.js');
+const con = mysql.connection;
 
 module.exports = async (client, message) => {
     if (message.author.bot) return false;
