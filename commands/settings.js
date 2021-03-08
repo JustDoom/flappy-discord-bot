@@ -20,7 +20,7 @@ module.exports = {
             .setTitle('Settings')
             .setDescription(`Settings for Flappy bot in this discord server.`)
             .addFields(
-                { name: `Commands Run`, value: `${db.get('bot.commandsRun')}` },
+                { name: `Prefix`, value: `${prefix}` },
                 { name: `Servers`, value: `${client.guilds.cache.size}` }
             ).setFooter('Help keep the bot running by donating! PayPal.Me/justdoom')
 
