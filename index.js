@@ -65,6 +65,16 @@ client.on('ready', () => {
 client.on("guildCreate", guild => {
     console.log("Joined a new guild: " + guild.name);
     client.user.setActivity(`Moderating ${client.guilds.cache.size} servers`);
+
+	con.query(`SELECT * FROM data WHERE guildID=${message.guild.id}`, function (err, result, rows) {
+		if (err) {
+			return err;
+		} else if (!result) {
+			con.query(`INSERT INTO data (guildID, prefix, commands, messages) VALUES ('${message.guild.id}', '?', 0, 0)`), (err2, result) => {
+				if (err2) throw err2;
+			};
+		}
+	})
 })
 
 client.on("guildDelete", guild => {

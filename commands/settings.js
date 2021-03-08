@@ -1,22 +1,24 @@
 module.exports = {
-    name: 'setup',
+    name: 'settings',
     execute(message, args, Discord, db, client) {
         db.add('bot.commandsRun', 1);
 
-        var server = message.guild;
-        var name = message.author.username;
+        let prefix;
 
-        server.channel.create("setup", {
-            type: 'text',
-        })
-        .then((channel) => {
-            console.log(channel)
+        con.query(`SELECT prefix FROM data WHERE guildID=${message.guild.id}`, function (err, result, rows) {
+            if (err) {
+                return err;
+            } else if (!result) {
+                return console.log('Error getting prefix');
+            }
+
+            prefix = result[0];
         })
 
         const newEmbed = new Discord.MessageEmbed()
             .setColor('#2c5999')
-            .setTitle('Statistics')
-            .setAuthor(`${message.author.username}`, `${message.author.avatarURL()}`)
+            .setTitle('Settings')
+            .setDescription(`Settings for Flappy bot in this discord server.`)
             .addFields(
                 { name: `Commands Run`, value: `${db.get('bot.commandsRun')}` },
                 { name: `Servers`, value: `${client.guilds.cache.size}` }
